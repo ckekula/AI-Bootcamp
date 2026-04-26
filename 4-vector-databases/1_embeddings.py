@@ -9,6 +9,7 @@ from sentence_transformers import SentenceTransformer
 def main():
     # TODO 1: Initialize model that converts text → meaningful numbers
     # Replace ___ with: "all-MiniLM-L6-v2"
+    print("Loading model...")
     model = SentenceTransformer("___", local_files_only=True)
 
     # Scenario: User searching documentation
@@ -23,13 +24,16 @@ def main():
 
     # TODO 2: Convert query and docs to embeddings
     # Replace ___ with: model.encode(query)
+    print("Encoding query...")
     query_emb = ___
+
     # Replace ___ with: model.encode(docs)
+    print("Encoding docs...")
     doc_embs = ___
 
     # TODO 3: Find semantic matches
     # Replace ___ with: util.cos_sim(query_emb, doc_embs)[0]
-    scores = ___
+    scores = util.cos_sim(query_emb, doc_embs)[0]
 
     print(f"Query: '{query}'\n")
     print("Results (score > 0.3 = relevant):")
@@ -39,9 +43,6 @@ def main():
 
     print("\n💡 Notice: Found 'Password recovery' and 'Login help'")
     print("   Even though query didn't contain those exact words!")
-
-    os.makedirs("/root/markers", exist_ok=True)
-    open("/root/markers/task1_embeddings_complete.txt", "w").write("DONE")
 
 if __name__ == "__main__":
     main()

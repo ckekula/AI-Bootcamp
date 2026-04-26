@@ -26,7 +26,12 @@ uv venv --python 3.12.12
 .venv/Scripts/activate
 
 # Install required packages
+pip install huggingface_hub
 pip install sentence-transformers langchain langchain-community langchain-huggingface chromadb numpy
+
+# Setup Huggingface
+huggingface-cli login
+huggingface-cli download sentence-transformers/all-MiniLM-L6-v2
 ```
 
 ### 2. Complete Tasks in Order
