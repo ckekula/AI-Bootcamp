@@ -4,29 +4,33 @@ Task 3: Making Your First API Call
 Understand EVERY part of the chat completion call.
 """
 
-import google.generativeai as genai
+from google import genai
 import os
+from dotenv import load_dotenv
 
-# Initialize client
-# Note: Gemini uses genai.configure instead of a client object instantiation
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# Load variables from .env file
+load_dotenv()
+
+api_key = os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key=api_key)
 
 # ==========================================
 # UNDERSTANDING THE API CALL STRUCTURE
 # ==========================================
 #
 # To make a Gemini API call, you:
-# 1. Initialize a model using genai.GenerativeModel('model-name')
-# 2. Call generate_content()
+# 1. Use the client object to access models
+# 2. Choose a model (e.g., 'gemini-2.5-flash' or 'gemini-2.5-pro')
+# 3. Call the generate_content method with your prompt
 #
-# Gemini models: "gemini-1.5-flash" (fast) or "gemini-1.5-pro" (powerful)
 # ==========================================
 
-# TODO: Fill in the blanks and uncomment the lines below:
+# TODO: Fill Uncomment the lines below:
 
-# model = genai.GenerativeModel('gemini-1.5-flash')
-
-# response = model.generate_content("Hello AI, please introduce yourself")
+# response = client.models.generate_content(
+#     model='gemini-2.5-flash-lite', 
+#     contents="Hello AI, please introduce yourself"
+# )
 
 # ==========================================
 # REAL RESPONSE OBJECT STRUCTURE
@@ -62,12 +66,6 @@ try:
 
         print("✅ API Call Successful!")
         print(f"\n🤖 AI said: {ai_text}")
-        print(f"\n📊 Total tokens used: {response.usage_metadata.total_token_count}")
-
-        # Create marker
-        os.makedirs("/root/markers", exist_ok=True)
-        with open("/root/markers/task3_api_call_complete.txt", "w") as f:
-            f.write("SUCCESS")
     else:
         print("❌ Complete the code to make your first API call")
 except Exception as e:

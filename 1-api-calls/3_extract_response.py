@@ -4,14 +4,19 @@ Task 4: Extracting the AI's Response
 Learn the EXACT path to get the AI's answer from the response object.
 """
 
-import google.generativeai as genai
+from google import genai
 import os
+from dotenv import load_dotenv
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+load_dotenv()
 
-# Make a simple API call to get a response
-model = genai.GenerativeModel('gemini-pro')
-response = model.generate_content("What is Python in one sentence?")
+api_key = os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key=api_key)
+
+response = client.models.generate_content(
+    model='gemini-2.5-flash-lite', 
+    contents="What is Python in one sentence?"
+)
 
 # ==========================================
 # THE MAGIC PATH TO THE AI'S ANSWER
@@ -36,19 +41,24 @@ response = model.generate_content("What is Python in one sentence?")
 # └────┬────┘
 #      │
 #      ▼
-# ┌─────────┐     .message: The message object containing the response
-# │.message │
+# ┌─────────┐     .content: The message object containing the response
+# │.content │
 # └────┬────┘
 #      │
 #      ▼
-# ┌─────────┐     .content: The actual text string from the AI!
-# │.content │
+# ┌─────────┐     .parts: List of parts in the message (usually just one)
+# │.parts   │
+# └────┬────┘
+#      │
+#      ▼
+# ┌─────────┐     [0]: Get the first (and typically only) part
+# │   [0]   │
 # └─────────┘
 # ==========================================
 
 # TODO: Extract the AI's text response using the exact path
 # Fill in each part of the path:
-ai_text = response.___[___].___.___  # TODO: choices[0].message.content
+ai_text = response.___[___].___.___  # TODO: candidates[0].content.parts[0].text
 
 # Display what we extracted
 print("🎯 Successfully extracted the AI's response!")

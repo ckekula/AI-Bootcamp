@@ -36,6 +36,7 @@ When you call the API, you get back a "package" containing:
 
 ### Step 1: Setup Your Environment
 ```bash
+pip install uv
 uv venv --python 3.12.12
 .venv/Scripts/activate
 ```
