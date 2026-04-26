@@ -74,10 +74,6 @@ def main():
         print("  - Cleaner response handling")
         print("  - Provider agnostic")
 
-        # Create marker
-        os.makedirs("/root/markers", exist_ok=True)
-        with open("/root/markers/task1_complete.txt", "w") as f:
-            f.write("COMPLETED")
         print("\n✅ Task 1 completed!")
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ Learning Goal: Master chain composition with the pipe operator (|).
 """
 
 import os
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.output_parsers import CommaSeparatedListOutputParser
@@ -17,11 +17,10 @@ def main():
     print("=" * 50)
 
     # Initialize LLM once
-    llm = ChatOpenAI(
-        model="openai/gpt-4.1-mini",
-        api_key=os.getenv("OPENAI_API_KEY"),
-        base_url=os.getenv("OPENAI_API_BASE"),
-        temperature=0.3
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash-lite",
+        google_api_key=os.getenv("GEMINI_API_KEY"),
+        temperature=0
     )
 
     # Chain 1: Simple Analysis Chain

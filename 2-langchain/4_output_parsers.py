@@ -8,7 +8,7 @@ Learning Goal: Extract structured data from unstructured AI responses.
 
 import os
 import json
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 from langchain_core.output_parsers import CommaSeparatedListOutputParser
 from langchain_core.prompts import PromptTemplate
@@ -18,10 +18,9 @@ def main():
     print("=" * 50)
 
     # Initialize LLM once for all examples
-    llm = ChatOpenAI(
-        model="openai/gpt-4.1-mini",
-        api_key=os.getenv("OPENAI_API_KEY"),
-        base_url=os.getenv("OPENAI_API_BASE"),
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash-lite",
+        google_api_key=os.getenv("GEMINI_API_KEY"),
         temperature=0
     )
 
